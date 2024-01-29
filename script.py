@@ -47,6 +47,14 @@ def my_evaluate_board(board):
             if board[column][row] == "O" and board[column + 1][row] == "O":
                 o_two_streak += 1
 
+    for column in range(len(board)):
+        for row in range(len(board[0] - 1)):
+            if board[column][row] == "X" and board[column + 1][row] == "X":
+                x_two_streak += 1
+
+            if board[column][row] == "O" and board[column + 1][row] == "O":
+                o_two_streak += 1
+
     return x_two_streak - o_two_streak
 
     def new_board(make_board):
