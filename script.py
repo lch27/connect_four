@@ -28,7 +28,6 @@ def two_ai_game():
 def random_eval(board):
     return random.randint(-100, 100)
 
-
 def my_evaluate_board(board):
     if has_won(board, "X"):
         return float("Inf")
@@ -38,32 +37,50 @@ def my_evaluate_board(board):
     x_two_streak = 0
     o_two_streak = 0
 
-    for column in range(len(board - 1)):
+    # Check horizontal streaks
+    for column in range(len(board) - 1):
         for row in range(len(board[0])):
-
             if board[column][row] == "X" and board[column + 1][row] == "X":
                 x_two_streak += 1
-
             if board[column][row] == "O" and board[column + 1][row] == "O":
                 o_two_streak += 1
 
+    # Check vertical streaks
     for column in range(len(board)):
-        for row in range(len(board[0] - 1)):
-            if board[column][row] == "X" and board[column + 1][row] == "X":
+        for row in range(len(board[0]) - 1):
+            if board[column][row] == "X" and board[column][row + 1] == "X":
                 x_two_streak += 1
-
-            if board[column][row] == "O" and board[column + 1][row] == "O":
+            if board[column][row] == "O" and board[column][row + 1] == "O":
                 o_two_streak += 1
 
-    return x_two_streak - o_two_streak
+    # Check diagonal streaks (from top-left to bottom-right)
+    for column in range(len(board) - 1):
+        for row in range(len(board[0]) - 1):
+            if board[column][row] == "X" and board[column + 1][row + 1] == "X":
+                x_two_streak += 1
+            if board[column][row] == "O" and board[column + 1][row + 1] == "O":
+                o_two_streak += 1
 
-    def new_board(make_board):
-        select_space(new_board, 6, "X")
-        select_space(new_board, 5, "X")
-        select_space(new_board, 4, "O")
-        select_space(new_board, 3, "O")
+    for column in range(1, len(board)):
+        for row in range(len(board[0]) - 1):
+            if board[column][row] == "X" and board[column - 1][row + 1] == "X":
+                x_two_streak += 1
+            if board[column][row] == "O" and board[column - 1][row + 1] == "O":
+                o_two_streak += 1
 
-        print(my_evaluate_board(new_board))
+ return x_two_streak - o_two_streak
+
+def new_board():
+  board = make_board()
+  select_space(board, 6, "X")
+  select_space(board, 5, "X")
+  select_space(board, 4, "O")
+  select_space(board, 3, "O")
+  return board
+
+board = new_board()
+print(my_evaluate_board(board))
+
 
 
 two_ai_game()
