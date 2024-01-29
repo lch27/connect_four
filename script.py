@@ -4,7 +4,7 @@ def two_ai_game():
     my_board = make_board()
     while not game_is_over(my_board):
       #The "X" player finds their best move.
-      result = minimax(my_board, True, 4, -float("Inf"), float("Inf"), codecademy_evaluate_board)
+      result = minimax(my_board, True, 4, -float("Inf"), float("Inf"), my_evaluate_board)
       print("X Turn\nX selected", result[1])
       print(result[1])
       select_space(my_board, result[1], "X")
@@ -12,7 +12,7 @@ def two_ai_game():
 
       if not game_is_over(my_board):
         #The "O" player finds their best move
-        result = minimax(my_board, False, 4, -float("Inf"), float("Inf"), _____)
+        result = minimax(my_board, False, 4, -float("Inf"), float("Inf"), my_evaluate_board)
         print( "O Turn\nO selected ", result[1])
         print(result[1])
         select_space(my_board, result[1], "O")
